@@ -8,7 +8,7 @@
 
 * Model fitting: [model_fitting.md](/model_fitting.md)
 * Model selection: [model_selection.md](/model_selection.md)
-* Model visualization: coming soon
+* Model visualization: [model_viz.md](/model_viz.md)
 * References: coming soon
 
 
