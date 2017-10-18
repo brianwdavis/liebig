@@ -59,7 +59,7 @@ To print our model as a table of coefficients, we need to derive a few extra par
 
 We want to define the frontier at the minimum rate of PL to achieve maximum yield. So we set the operands of the `min` function to be equal, since that's the changepoint. By rearranging terms, we get the lower pair of equations. In addition, we can derive **Yield<sub>max</sub>** = β<sub>0</sub>+β<sub>3</sub>. However, the coefficients from our `demo_fit` aren't *true*, they're just estimates. We need to account for both the uncertainty in each one, as well as the covariance between them, when we do any arithmetic on them.
 
-> Note: <a href = "https://www.wolframalpha.com/input/?i=1+%3D+y%2Bb3*b2*x%2Fb1%2Bb3*b4*y*x%2Fb1,+solve+for+y">To generate the frontier for the interaction, it's helpful to have computers do the algebra for you</a>.
+> Note: <a href = "https://www.wolframalpha.com/input/?i=b3+%3D+b1*y+%2B+b2*x+%2B+b4*x*y,+solve+for+y">To generate the frontier for the interaction, it's helpful to have computers do the algebra for you</a>.
 
 Monte Carlo simulations are a good way to do this. We can approximate large numbers of samples of coefficient estimates as coming from a joint-normal distribution, with the means and covariance matrix given by R.
 
