@@ -2,7 +2,7 @@
 ### Annotated code for von Liebig model-fitting
 
 * Model fitting: [model_fitting.md](/model_fitting.md)
-* Model selection: coming soon
+* Model selection: [model_selection.md](/model_selection.md)
 * Model visualization: coming soon
 * References: coming soon
 
