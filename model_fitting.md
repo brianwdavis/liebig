@@ -44,6 +44,7 @@ library(dplyr)
 library(tidyr)
 library(nlme)
 library(broom)
+library(viridis)
 library(modelr)
 library(mvnfast)
 
