@@ -11,6 +11,8 @@
 | View the original poster            | TBA                                      |
 
 
+***
+
 Motivating model:
 
 ![Eq1: Yield = beta0 + min(beta1*PL+beta2*logCN), beta3)](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png)
