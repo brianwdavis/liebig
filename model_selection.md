@@ -5,13 +5,15 @@
 In addition to [the model we just fit](/model_fitting.md), it's a good idea to test some other models and see how they perform. One particularly useful model is the null (with the same random effects, but intercept only):
 
 ```r
-demo_fit_null <- lme(yield ~ 1,
-                     data   = demo_df_rs,
-                     random = ~ 1 | block,
-                     method = "ML")
+demo_fit_null <- 
+  lme(yield ~ 1,
+      data   = demo_df_rs,
+      random = ~ 1 | block,
+      method = "ML")
                      
 anova(demo_fit, demo_fit_null)
-
+```
+```
 ###
               Model df       AIC       BIC    logLik   Test  L.Ratio p-value
 demo_fit          1  6 -88.58407 -70.93422  50.29204                        
@@ -45,7 +47,8 @@ demo_fit_x <- nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn + beta4*pl*logcn,
 
 
 anova(demo_fit, demo_fit_x)
-
+```
+```
 ###
            Model df       AIC       BIC   logLik   Test  L.Ratio p-value
 demo_fit       1  6 -88.58407 -70.93422 50.29204                        
@@ -61,17 +64,19 @@ Now we might want to make sure that this is a reasonable model that we've chosen
 
 ```r
 demo_df_aug <- 
-  augment(demo_fit, data = demo_df_rs) %>% 
+  augment(demo_fit, demo_df_rs) %>% 
   mutate(.std.resid = .resid / sd(.resid))
 
-ggplot(demo_df_aug, aes(.fixed, .resid)) + 
+ggplot(demo_df_aug, 
+       aes(.fixed, .resid)) + 
   geom_point() + 
   stat_smooth() +
   theme_bw() + 
-  labs(x = "Predicted values,\nfixed effects only",
+  labs(x = "Predicted values, fixed effects only",
        y = "Residuals")
 
-ggplot(demo_df_aug, aes(sample = .std.resid)) + 
+ggplot(demo_df_aug, 
+       aes(sample = .std.resid)) + 
   geom_abline() + 
   stat_qq() + 
   theme_bw()
@@ -128,7 +133,7 @@ We want to define the frontier at the minimum rate of PL to achieve maximum yiel
 
 Monte Carlo simulations are a good way to do this. We can approximate large numbers of samples of coefficient estimates as coming from a joint-normal distribution, with the means and covariance matrix given by R.
 
-```r
+```
 fixef(demo_fit)
 
 ###
@@ -145,11 +150,12 @@ beta1  0.000724643  0.001702747 -0.04134221 -0.000724643
 beta2 -0.262873533 -0.041342213  7.26874997  0.262873538
 beta3 -0.010315810 -0.000724643  0.26287354  0.010656450
 ###
-
-
+```
+```r
 rmvn(1000, fixef(demo_fit), vcov(demo_fit), kpnames = T) %>% 
   as_data_frame()
-  
+```
+```
 ###  
 # A tibble: 1,000 x 4
       beta0     beta1     beta2      beta3
@@ -176,13 +182,13 @@ Then we can generate our new parameters, plot them, and summarize them in a way 
 demo_mc_coefs <- 
 rmvn(1000, fixef(demo_fit), vcov(demo_fit), kpnames = T) %>% 
   as_data_frame() %>% 
-  mutate(beta0  = beta0 *    1 / 0.1,
-         beta1  = beta1 * 0.01 / 0.1,
-         beta2  = beta2 * 0.01 / 0.1,
-         beta3  = beta3 *    1 / 0.1) %>% 
+  mutate(beta0 = beta0 * 1/0.1,
+         beta1 = beta1 * 0.01/0.1,
+         beta2 = beta2 * 0.01/0.1,
+         beta3 = beta3 * 1/0.1) %>% 
   mutate(gamma0 = beta3/beta1,
          gamma1 = -beta2/beta1,
-         Ymax = beta0 + beta3)
+         Ymax   = beta0 + beta3)
          
 ggpairs(demo_mc_coefs) + 
   theme_bw() + 
@@ -194,10 +200,12 @@ ggpairs(demo_mc_coefs) +
 
 ```r
 demo_mc_coefs %>% 
-  gather(key = param, value = value) %>% 
-  group_by(param) %>% 
-  summarise(estimate = mean(value), se = sd(value)) %>% 
-  mutate_if(is.numeric, funs(signif(., 3)))
+  gather() %>% 
+  group_by(key) %>% 
+  summarise(estimate = mean(value), 
+            se = sd(value)) %>% 
+  mutate_if(is.numeric, 
+            funs(signif(., 3)))
   
 ###
 # A tibble: 7 x 3
