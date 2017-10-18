@@ -10,7 +10,7 @@ demo_df <- read_csv("https://raw.githubusercontent.com/brianwdavis/liebig/master
 
 demo_df
 ```
-```r
+```
 ###
 # A tibble: 140 x 5
    block plotID        CN    pl     yield
