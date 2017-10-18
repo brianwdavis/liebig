@@ -6,7 +6,9 @@
 * Model visualization: coming soon
 * References: coming soon
 
-Visit the 3d surface demonstration: https://brianwdavis.shinyapps.io/liebig/
+| Visit the 3d surface demonstration: | https://brianwdavis.shinyapps.io/liebig/ |
+|-------------------------------------|------------------------------------------|
+| View the original poster            | TBA                                      |
 
 
 Motivating model:
