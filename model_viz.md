@@ -269,7 +269,7 @@ demo_frontier
 ###
 ```
 
-We can plot this data on top of our last figure:
+We can plot this data on top of our last figure. Note that the band is *prediction* intervals, not *confidence* intervals, since we are plotting the region where 95% of the data are.
 
 ```r
 fig_top +
