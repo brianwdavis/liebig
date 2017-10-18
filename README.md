@@ -1,4 +1,4 @@
-# liebig
+# Linear-plateau response surfaces
 
 | Visit the 3d surface demonstration: | https://brianwdavis.shinyapps.io/liebig/ |
 |-------------------------------------|------------------------------------------|
