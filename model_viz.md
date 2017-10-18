@@ -286,3 +286,5 @@ fig_top +
 ![](/images/demo_alongZ_frontier.png)
 
 While this figure is more cognitively-tasking to understand and interpret, it emphasizes the frontier we derived as its primary focus. This is the most functionally interesting part of our model: we can predict what minimum level of fertilization should be done in-season to achieve maximum yield of our cash crop, given the quality of the cover crop that grew in the winter prior.
+
+If you've made it this far, please go check out what this looks like in 3d: https://brianwdavis.shinyapps.io/liebig/
