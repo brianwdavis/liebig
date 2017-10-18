@@ -34,7 +34,7 @@ Now we can add the predictions and rescale the values to their original scale. A
 
 The `level = 0` argument of `predict` indicates to use the population-level predictions (fixed effects only). If you want to use the fitted values, accounting for the random effects, you can use `level = 1`, but you also need to add `data_grid(..., block, ...)` above. This is helpful if your random effects include siteyears that you want to plot separately, as I did on the poster. However, it will cause problems with plotting everything we've done so far in a single panel, so we're using fixed effects only.
 
-```r
+```
 demo_grid_aug <- 
   demo_grid %>% 
   mutate(.fixed  = 10 * predict(demo_fit, newdata = ., level = 0),
@@ -64,7 +64,7 @@ demo_grid_aug
 
 ## "Side-on" view of the response curve
 
-```r
+```
 PL_lab <- expression("PL rate, kg PAN ha"^-1)
 GY_lab <- expression("Grain yield, Mg ha"^-1)
 CN_lab <- "C:N ratio, log-scaled"
@@ -92,14 +92,16 @@ We might want to add in our original data to give some context to the model fits
 
 ```r
 fig_side +
-  geom_point(data = demo_df, aes(y = yield), alpha = 0.5)
+  geom_point(data = demo_df, 
+             aes(y = yield), 
+             alpha = 0.5)
 ```
 
 ![](/images/demo_alongX_data.png)
 
 ## "Top-down" view of the frontier
 
-```r
+```
 fig_top <-
 ggplot(demo_grid_aug, aes(x = CN, y = pl)) + 
   stat_contour(aes(z = .fixed, color = ..level..)) + 
@@ -120,7 +122,8 @@ Again for context, we can add a layer of points for the raw data:
 ```r
 fig_top <-
   fig_top +
-  geom_point(data = demo_df, aes(color = yield))
+  geom_point(data = demo_df, 
+             aes(color = yield))
 
 fig_top
 ```
@@ -182,7 +185,7 @@ demo_grid_logcn
 
 Now we'll embed this entire dataframe over and over into each row of our simulated coefficients as a list-column.
 
-```r
+```
 demo_mc_coefs %>% 
   select(gamma0, gamma1) %>% 
   mutate(grid = list(demo_grid_logcn))
@@ -209,7 +212,7 @@ These steps can be computationally challenging. Depending on the size of your gr
 
 We expand out each of the nested dataframes and calculate the **PL** saturation point using the γ coefficients.
 
-```r
+```
 demo_mc_coefs %>% 
   select(gamma0, gamma1) %>% 
   mutate(grid = list(demo_grid_logcn)) %>% 
@@ -236,7 +239,7 @@ demo_mc_coefs %>%
 
 Now we `group_by` each possible level of `logcn` in our grid and find the mean and error associated with all the possible levels of PL saturation points. Finally, we exponentiate the `logcn` column back to a **CN** value for our convenience.
 
-```r
+```
 demo_frontier <- 
 demo_mc_coefs %>% 
   select(gamma0, gamma1) %>% 
@@ -271,7 +274,7 @@ demo_frontier
 
 We can plot this data on top of our last figure. Note that the band is *prediction* intervals, not *confidence* intervals, since we are plotting the region where 95% of the data are.
 
-```r
+```
 fig_top +
   geom_ribbon(data = demo_frontier, 
               aes(ymin = pl - 1.96*pl_se,
