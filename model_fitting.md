@@ -106,13 +106,14 @@ So I'll round these off and use them in `start = list(...)`.
 Then we can try to fit a linear-plateau model across the two dimensions.
 
 ```r
-demo_fit <- nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn, beta3),
-                 data   = demo_df,
-                 fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
-                 random = beta0 ~ 1 | block,
-                 start  = list(beta0 = 10, beta1 = 0.01, 
-                               beta2 = -1, beta3 = 10, 
-                               fixed = rep(1, 4)))
+demo_fit <- 
+  nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn, beta3),
+       data   = demo_df,
+       fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
+       random = beta0 ~ 1 | block,
+       start  = list(beta0 = 10, beta1 = 0.01, 
+                     beta2 = -1, beta3 = 10, 
+                     fixed = rep(1, 4)))
 ###                               
 Error in MEEM(object, conLin, control$niterEM) : 
   Singularity in backsolve at level 0, block 1  
@@ -138,13 +139,14 @@ Coefficients:
       1.208        0.209      -11.749  
 ###
 
-demo_fit <- nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn, beta3),
-                 data   = demo_df_rs,
-                 fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
-                 random = beta0 ~ 1 | block,
-                 start  = list(beta0 = 1, beta1 = 1, 
-                               beta2 = -10, beta3 = 1, 
-                               fixed = rep(1, 4)))
+demo_fit <- 
+  nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn, beta3),
+       data   = demo_df_rs,
+       fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
+       random = beta0 ~ 1 | block,
+       start  = list(beta0 = 1, beta1 = 1, 
+                     beta2 = -10, beta3 = 1, 
+                     fixed = rep(1, 4)))
 ```
 
 No error this time, so it converged. We still have to see if it converged to a reasonable global solution, or if the algorithm got stuck in a local minimum. If you're someone who likes progress bars, or at least some indication that work is happening, you can add `nlme(..., control = nlmeControl(msVerbose = ), verbose = T)`.
