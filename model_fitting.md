@@ -31,22 +31,45 @@ demo_df
 Let's look at the data with a bit more rigor than this preview. First we'll load some useful packages.
 
 ```r
+library(purrr)
 library(ggplot2)
 library(GGally)
 library(dplyr)
+library(tidyr)
 library(nlme)
+library(broom)
+library(modelr)
+library(mvnfast)
 
-summary(demo_df)
+
+demo_df %>% map(summary)
+
 ```
 ```
 ###
- block     plotID                CN                pl          yield     
- A:35   Length:140         Min.   :  9.256   Min.   :  0   Min.   : 2.340
- B:35   Class :character   1st Qu.: 18.500   1st Qu.: 70   1st Qu.: 8.895
- C:35   Mode  :character   Median : 39.304   Median :140   Median :10.577
- D:35                      Mean   : 54.835   Mean   :140   Mean   :10.697
-                           3rd Qu.: 83.508   3rd Qu.:210   3rd Qu.:13.227
-                           Max.   :170.419   Max.   :280   Max.   :17.777
+$block
+ A  B  C  D 
+35 35 35 35 
+
+$plotID
+   Length     Class      Mode 
+      140 character character 
+
+$CN
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  9.256  18.500  39.300  54.830  83.510 170.400 
+
+$pl
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      0      70     140     140     210     280 
+
+$yield
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.340   8.895  10.580  10.700  13.230  17.780 
+
+$logcn
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.225   2.918   3.671   3.668   4.425   5.138 
 ###
 ```
 ```r
