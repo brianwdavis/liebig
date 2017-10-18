@@ -179,4 +179,4 @@ D  0.18723229
 ###
 ```
 
-Next up: model evaluation and selection.
+Next up: [model evaluation and selection](/model_selection.md).
