@@ -37,7 +37,8 @@ library(dplyr)
 library(nlme)
 
 summary(demo_df)
-
+```
+```
 ###
  block     plotID                CN                pl          yield     
  A:35   Length:140         Min.   :  9.256   Min.   :  0   Min.   : 2.340
@@ -47,7 +48,8 @@ summary(demo_df)
                            3rd Qu.: 83.508   3rd Qu.:210   3rd Qu.:13.227
                            Max.   :170.419   Max.   :280   Max.   :17.777
 ###
-
+```
+```r
 ggpairs(demo_df %>% select(-plotID),
         lower = list(combo = "denstrip")) + 
   theme_bw()
