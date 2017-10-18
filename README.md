@@ -12,7 +12,7 @@
 * References: coming soon
 
 
-
+Throughout, if you have any questions or corrections, don't hesitate to [file an issue](https://github.com/brianwdavis/liebig/issues) or email me at brianwdavis@gmail.com
 
 ***
 
