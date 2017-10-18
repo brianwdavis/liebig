@@ -2,7 +2,7 @@
 
 | Visit the 3d surface demonstration: | https://brianwdavis.shinyapps.io/liebig/ |
 |-------------------------------------|------------------------------------------|
-| View the original poster            | TBA                                      |
+| View the original poster:           | TBA                                      |
 
 ### Annotated code for von Liebig model-fitting
 
