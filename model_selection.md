@@ -36,14 +36,17 @@ Coefficients:
 ###
 
 
-demo_fit_x <- nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn + beta4*pl*logcn, beta3),
-                   data   = demo_df_rs,
-                   fixed  = beta0 + beta1 + beta2 + beta3 + beta4 ~ 1,
-                   random = beta0 ~ 1 | block,
-                   start  = list(beta0 = 1, beta1 = 1, 
-                                 beta2 = -10, beta3 = 1, 
-                                 beta4 = 10,
-                                 fixed = rep(1, 5)))
+demo_fit_x <- 
+  nlme(yield ~ beta0 + pmin(beta1*pl + beta2*logcn + beta4*pl*logcn, beta3),
+       data   = demo_df_rs,
+       fixed  = beta0 + beta1 + beta2 + beta3 + beta4 ~ 1,
+       random = beta0 ~ 1 | block,
+       start  = list(beta0 = 1, 
+                     beta1 = 1, 
+                     beta2 = -10, 
+                     beta3 = 1, 
+                     beta4 = 10,
+                     fixed = rep(1, 5)))
 
 
 anova(demo_fit, demo_fit_x)
