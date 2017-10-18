@@ -9,7 +9,8 @@ library(readr)
 demo_df <- read_csv("https://raw.githubusercontent.com/brianwdavis/liebig/master/demo_df.csv")
 
 demo_df
-
+```
+```r
 ###
 # A tibble: 140 x 5
    block plotID        CN    pl     yield
@@ -111,8 +112,10 @@ demo_fit <-
        data   = demo_df,
        fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
        random = beta0 ~ 1 | block,
-       start  = list(beta0 = 10, beta1 = 0.01, 
-                     beta2 = -1, beta3 = 10, 
+       start  = list(beta0 = 10, 
+                     beta1 = 0.01, 
+                     beta2 = -1, 
+                     beta3 = 10, 
                      fixed = rep(1, 4)))
 ###                               
 Error in MEEM(object, conLin, control$niterEM) : 
@@ -144,8 +147,10 @@ demo_fit <-
        data   = demo_df_rs,
        fixed  = beta0 + beta1 + beta2 + beta3 ~ 1,
        random = beta0 ~ 1 | block,
-       start  = list(beta0 = 1, beta1 = 1, 
-                     beta2 = -10, beta3 = 1, 
+       start  = list(beta0 = 1, 
+                     beta1 = 1, 
+                     beta2 = -10, 
+                     beta3 = 1, 
                      fixed = rep(1, 4)))
 ```
 
