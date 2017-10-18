@@ -1,4 +1,9 @@
 # Model-fitting
+
+## Background
+
+This write-up is derived from a paper in preparation (and the poster you saw that led you here) that discusses an experiment conducted at USDA-ARS in Beltsville, MD. Cover crops were planted (a range of mixtures from hairy vetch monoculture to cereal rye monoculture) in fall and then terminated at corn planting in spring. Corn was subsequently fertilized with subsurface-banded poultry litter (**PL**). Hairy vetch is a legume that fixes N from the atmosphere, while cereal rye is a grass that immobilizes soil N into its tissues. The quality of the residues (as measured by **C:N** ratio) regulates the release of the stored N from the residue into the soil where it is available to the cash crop. Thus both **CN** and **PL** affect **yield**.
+
 ### Step by step
 
 I've generated a synthetic dataset you can use to follow along with a similar format to one siteyear of my data. The columns are a field **block**, a **plot ID** code, the **C:N** ratio of the aboveground biomass at cover crop termination, the rate of **poultry litter** applied as kg PAN ha<sup>-1</sup>, and the **yield** in Mg ha<sup>-1</sup>. A note on style: throughout, I'll be mixing code and output to the console, but output will always be preceded and succeeded by `###`.
