@@ -1,5 +1,10 @@
 # liebig
-### Annotated code for von Liebig model-fitting (coming soon)
+### Annotated code for von Liebig model-fitting
+
+* Model fitting: [model_fitting.md](/model_fitting.md)
+* Model selection: coming soon
+* Model visualization: coming soon
+* References: coming soon
 
 Visit the 3d surface demonstration: https://brianwdavis.shinyapps.io/liebig/
 
