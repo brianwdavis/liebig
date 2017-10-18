@@ -1,5 +1,7 @@
 # Model selection and evaluation
 
+## Compare with competing models
+
 In addition to [the model we just fit](/model_fitting.md), it's a good idea to test some other models and see how they perform. One particularly useful model is the null (with the same random effects, but intercept only):
 
 ```r
@@ -53,6 +55,69 @@ demo_fit_x     2  7 -90.03916 -69.44766 52.01958 1 vs 2 3.455089  0.0631
 
 The AIC is lower for the interaction model and the BIC is lower for the additive model, but the likelihood ratio test says there's no significant difference between them. One might consider the more parsimonious model to be better (for some definition of better). I'll do that for the following analyses and leave it as an exercise to the reader to investigate what this model looks like with an interaction.
 
+## Evaluate model fit
+
+Now we might want to make sure that this is a reasonable model that we've chosen. We can check the properties of the residuals, just like with a regular `lm`. First we `broom::augment` the model to generate the predictions using all effects and fixed effects only as well as residuals. Then we create an additional column of standardized residuals by scaling them to a variance of 1.
+
+```r
+demo_df_aug <- 
+  augment(demo_fit, data = demo_df_rs) %>% 
+  mutate(.std.resid = .resid / sd(.resid))
+
+ggplot(demo_df_aug, aes(.fixed, .resid)) + 
+  geom_point() + 
+  stat_smooth() +
+  theme_bw() + 
+  labs(x = "Predicted values,\nfixed effects only",
+       y = "Residuals")
+
+ggplot(demo_df_aug, aes(sample = .std.resid)) + 
+  geom_abline() + 
+  stat_qq() + 
+  theme_bw()
+```
+
+|![](/images/resid.png) |![](/images/qq.png)|
+|-----------------------|-------------------|
+
+Then we might want to summarize the model by some measure of goodness-of-fit beyond the AIC/BIC generated above. The concept of R<sup>2</sup> for a non-linear model isn't exactly clear, but there are some analogues in use.
+
+```r
+# RMSE
+sqrt(var(demo_df_aug$.resid))
+
+###
+0.1592303
+###
+# Recall that our response was scaled
+# True RMSE is 1.59 Mg/ha
+
+# Omega^2: Xu
+1 - var(demo_df_aug$.resid) / var(demo_df_aug$yield)
+
+###
+0.7848197
+###
+# This can be somewhat interpreted as "variance explained" like R^2.
+
+# Pseudo-R^2: Cox-Snell
+demo_ll <- as.numeric(logLik(demo_fit))
+demo_ll0 <- as.numeric(logLik(demo_fit_null))
+
+1 - exp(2*(demo_ll0 - demo_ll)/nobs(demo_fit))
+
+###
+0.7238377
+###
+# This is the goodness-of-fit of our model relative to the null model.
+# Recall that our null model had the same random effects, so this measures
+#   just the fit due to the fixed effects, PL and CN.
+
+```
+There are other such measures of goodness-of-fit, but taken together, RMSE=1.59 Mg ha<sup>-1</sup>, Ω<sup>2</sup>=0.78, and *p*-R<sup>2</sup>=0.72 give you a reasonable idea of how the model performs.
+
+## Model summary
+
 To print our model as a table of coefficients, we need to derive a few extra parameters of interest from the model. Recall:
 
 ![](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png)
@@ -103,9 +168,9 @@ rmvn(1000, fixef(demo_fit), vcov(demo_fit), kpnames = T) %>%
 ###
 ```
 
-`rmvn` is doing the population sampling for us. However, recall that we had scaled our variables to fit the model, so now we need to unscale them by the appropriate factors. (If anyone can think of a good programmatic way to do this, do not hesitate to let me know.)
+`mvnfast::rmvn` is doing the population sampling for us. However, recall that we had scaled our variables to fit the model, so now we need to unscale them by the appropriate factors. (If anyone can think of a good programmatic way to do this, do not hesitate to let me know.)
 
-Then we can generate our new parameters, summarize them, and plot them.
+Then we can generate our new parameters, plot them, and summarize them in a way suitable for a table.
 
 ```r
 demo_mc_coefs <- 
@@ -119,31 +184,35 @@ rmvn(1000, fixef(demo_fit), vcov(demo_fit), kpnames = T) %>%
          gamma1 = -beta2/beta1,
          Ymax = beta0 + beta3)
          
-
-demo_mc_coefs %>% 
-  gather(key = param, value = value) %>% 
-  group_by(param) %>% 
-  summarise(estimate = mean(value), se = sd(value))
-  
-###
-# A tibble: 7 x 3
-   param     estimate           se
-   <chr>        <dbl>        <dbl>
-1  beta0  15.47076119  1.278354958
-2  beta1   0.04571399  0.004102627
-3  beta2  -2.40019360  0.269551663
-4  beta3  -2.88273130  1.048210067
-5 gamma0 -63.24381856 22.992277501
-6 gamma1  52.74683771  6.221282735
-7   Ymax  12.58802989  0.785173467
-###
-
-
 ggpairs(demo_mc_coefs) + 
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
-
 ![](/images/mc_coefs.png)
+
+### Model table
+
+```r
+demo_mc_coefs %>% 
+  gather(key = param, value = value) %>% 
+  group_by(param) %>% 
+  summarise(estimate = mean(value), se = sd(value)) %>% 
+  mutate_if(is.numeric, funs(signif(., 3)))
+  
+###
+# A tibble: 7 x 3
+   param estimate      se
+   <chr>    <dbl>   <dbl>
+1  beta0  15.5000  1.2800
+2  beta1   0.0457  0.0041
+3  beta2  -2.4000  0.2700
+4  beta3  -2.8800  1.0500
+5 gamma0 -63.2000 23.0000
+6 gamma1  52.7000  6.2200
+7   Ymax  12.6000  0.7850
+###
+```
+
+
 
 Next up: [model visualization](/model_viz.md).
