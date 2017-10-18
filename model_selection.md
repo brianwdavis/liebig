@@ -193,7 +193,17 @@ rmvn(1000, fixef(demo_fit), vcov(demo_fit), kpnames = T) %>%
          gamma1 = -beta2/beta1,
          Ymax   = beta0 + beta3)
          
-ggpairs(demo_mc_coefs) + 
+light <-
+  function (data, mapping, ...) {
+  
+    ggplot(data = data, 
+           mapping = mapping) + 
+      geom_point(alpha = 0.1, ...)
+      
+  }
+
+ggpairs(demo_mc_coefs,
+        lower = list(continuous = light)) + 
   theme_bw() + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
