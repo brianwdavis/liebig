@@ -128,7 +128,17 @@ There are other such measures of goodness-of-fit, but taken together, RMSE=1.59 
 
 To print our model as a table of coefficients, we need to derive a few extra parameters of interest from the model. Recall:
 
-![](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png)
+![](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png "\begin{equation}
+  \begin{aligned}
+    &\text{Yield} &=& &\beta_0& + \min\begin{cases} \beta_1\times \text{PL} + \beta_2\times \ln(\text{C:N ratio}) \\  \beta_3 \end{cases} + \varepsilon_N
+  \end{aligned}
+ \end{equation}
+\begin{equation}
+    \begin{aligned}
+    &\text{PL}_{sat} &=& &\frac{\hat\beta_3}{\hat\beta_1}& &+& &\frac{-\hat\beta_2}{\hat\beta_1}& &\times& &\ln(\text{C:N ratio})& \\
+    &\text{PL}_{sat} &=& &\hat\gamma_0& &+& &\hat\gamma_1& &\times& &\ln(\text{C:N ratio})&
+  \end{aligned}
+\end{equation}")
 
 We want to define the frontier at the minimum rate of PL to achieve maximum yield. So we set the operands of the `min` function to be equal, since that's the changepoint. By rearranging terms, we get the lower pair of equations. In addition, we can derive **Yield<sub>max</sub>** = β<sub>0</sub>+β<sub>3</sub>. However, the coefficients from our `demo_fit` aren't *true*, they're just estimates. We need to account for both the uncertainty in each one, as well as the covariance between them, when we do any arithmetic on them.
 
