@@ -210,7 +210,7 @@ demo_mc_coefs %>%
 
 These steps can be computationally challenging. Depending on the size of your grid and the size of your coefficient simulation, you may start to get unwieldy numbers of observations quite quickly. I recommend working with a subset of each to figure out how long the operation might take. There are ways to parallelize `dplyr` functions that are beyond the scope of this tutorial. Luckily with this small dataset, the computation is very fast.
 
-We expand out each of the nested dataframes and calculate the **PL** saturation point using the γ coefficients.
+We expand out each of the nested dataframes and calculate the **PL** saturation point using the <strong>&gamma;</strong> coefficients.
 
 ```
 demo_mc_coefs %>% 
