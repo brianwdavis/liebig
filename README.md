@@ -18,7 +18,18 @@ Throughout, if you have any questions or corrections, don't hesitate to [file an
 
 Motivating model:
 
-![Eq1: Yield = beta0 + min(beta1*PL+beta2*logCN), beta3)](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png)
+![Eq1: Yield = beta0 + min(beta1*PL+beta2*logCN), beta3)](/images/models%20cropped%20with%20hats%20and%20left%20aligned.png "\begin{equation}
+  \begin{aligned}
+    &\text{Yield} &=& &\beta_0& + \min\begin{cases} \beta_1\times \text{PL} + \beta_2\times \ln(\text{C:N ratio}) \\  \beta_3 \end{cases} + \varepsilon_N
+  \end{aligned}
+ \end{equation}
+\begin{equation}
+    \begin{aligned}
+    &\text{PL}_{sat} &=& &\frac{\hat\beta_3}{\hat\beta_1}& &+& &\frac{-\hat\beta_2}{\hat\beta_1}& &\times& &\ln(\text{C:N ratio})& \\
+    &\text{PL}_{sat} &=& &\hat\gamma_0& &+& &\hat\gamma_1& &\times& &\ln(\text{C:N ratio})&
+  \end{aligned}
+\end{equation}
+")
 
 The lower pair of equations is derived from the model by finding the point where the two operands of the `min` function meet. Rearranging algebraically for PL finds the PL "saturation point", as defined by a line running through the space of C:N ratio.
 
@@ -33,7 +44,7 @@ The net result for all our site years would look like this:
 
 Here you can see the classic shape of the linear-plateau relationship along the PL axis, but enveloping a region of varying C:N ratios. The lines that are higher in yield for a given rate of PL are more bluish-purple, meaning a low C:N ratio residue dominated by hairy vetch. The lines that are lower in yield for a given rate of PL are more orangey-yellow, meaning a high C:N ratio residue dominated by cereal rye.
 
-This figure's strength is understanding and interpreting qualitatively. However, you can't really tell what the relationship between the independent variables is. How steep is that color gradient? Even knowing that each unit change along the envelope is offset horizontally by γ<sub>1</sub>=-β<sub>2</sub>/β<sub>1</sub> isn't helpful, since it's not clear exactly where the unit changes in log-C:N ratio are.
+This figure's strength is understanding and interpreting qualitatively. However, you can't really tell what the relationship between the independent variables is. How steep is that color gradient? Even knowing that each unit change along the envelope is offset horizontally by <strong>&gamma;<sub>1</sub>=-&beta;<sub>2</sub>/&beta;<sub>1</sub></strong> isn't helpful, since it's not clear exactly where the unit changes in logC:N ratio are.
 
 Our goal is to predict the PL application rate that will achieve maximum yield. We can predict this using the derived formulae from above. If you imagine the above figure as a 3d surface, you'd have been looking down the x-axis. Now we want to look down the z-axis:
 
