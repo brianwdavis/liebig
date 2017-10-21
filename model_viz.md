@@ -237,6 +237,10 @@ demo_mc_coefs %>%
 ###
 ```
 
+This generates all the possible frontiers derived from our coefficient estimates. You can see that they're mostly clustered along one path, with some faint outliers as you move away from the path, and that there's wiggle toward the ends as variance in the slope (&gamma;<sub>1</sub) gets magnified.
+
+![](/images/demo.gif)
+
 Now we `group_by` each possible level of `logcn` in our grid and find the mean and error associated with all the possible levels of PL saturation points. Finally, we exponentiate the `logcn` column back to a **CN** value for our convenience.
 
 ```
