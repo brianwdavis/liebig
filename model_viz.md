@@ -237,7 +237,7 @@ demo_mc_coefs %>%
 ###
 ```
 
-This generates all the possible frontiers derived from our coefficient estimates. You can see that they're mostly clustered along one path, with some faint outliers as you move away from the path, and that there's wiggle toward the ends as variance in the slope (&gamma;<sub>1</sub) gets magnified.
+This generates all the possible frontiers derived from our coefficient estimates. You can see that they're mostly clustered along one path, with some faint outliers as you move away from the path, and that there's wiggle toward the ends as variance in the slope (&gamma;<sub>1</sub>) gets magnified.
 
 ![](/images/demo.gif)
 
