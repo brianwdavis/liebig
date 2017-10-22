@@ -6,6 +6,9 @@
 | **The original poster:** |
 | [Davis et al., 2017](/Davis_et_al_2017_Liebig_in_2_Dimensions.pdf) |
 
+> *Click on "View all of README.md" if this page isn't fully visible on your device.*
+
+***
 
 ### Annotated code for von Liebig model-fitting
 
