@@ -1,8 +1,8 @@
 # Linear-plateau response surfaces
 
-| Visit the 3d surface demonstration: | https://brianwdavis.shinyapps.io/liebig/ |
-|-------------------------------------|------------------------------------------|
-| View the original poster:           | TBA                                      |
+| A 3d surface demonstration: |  The original poster: |
+|:-------------------------------------|------------------------------------------|
+| https://brianwdavis.shinyapps.io/liebig/  | [Davis et al., 2017](/Davis_et_al_2017_Liebig_in_2_Dimensions.pdf) |
 
 ### Annotated code for von Liebig model-fitting
 
