@@ -3,7 +3,7 @@
 | A 3d surface demonstration: |  
 |:-------------------------------------|
 | https://brianwdavis.shinyapps.io/liebig/  | 
-| The original poster: |
+| **The original poster:** |
 | [Davis et al., 2017](/Davis_et_al_2017_Liebig_in_2_Dimensions.pdf) |
 
 
