@@ -15,7 +15,10 @@
 * Model fitting: [model_fitting.md](/model_fitting.md)
 * Model selection: [model_selection.md](/model_selection.md)
 * Model visualization: [model_viz.md](/model_viz.md)
-* Bayesian (`brms`) comparison and references: coming soon
+
+* Bayesian (`brms`) comparison: coming soon
+* Alternative functional model candidates: coming soon
+* References: coming soon
 
 
 Throughout, if you have any questions or corrections, don't hesitate to [file an issue](https://github.com/brianwdavis/liebig/issues) or email me at brianwdavis@gmail.com
